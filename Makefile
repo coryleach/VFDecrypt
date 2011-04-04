@@ -1,5 +1,7 @@
 linux: 
 	gcc -o vfdecrypt vfdecrypt.c -lcrypto
+osx: 
+	gcc -o vfdecrypt vfdecrypt.c -lcrypto -DMAC_OSX
 install: 
 	cp ./vfdecrypt /usr/local/bin
 	ldconfig

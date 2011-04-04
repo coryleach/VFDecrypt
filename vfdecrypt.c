@@ -39,10 +39,21 @@
 #include <openssl/aes.h>
 #include <openssl/hmac.h>
 #include <openssl/evp.h>
-#include <byteswap.h>
 
+#ifndef MAC_OSX 
+
+#include <byteswap.h>
 #define OSSwapHostToBigInt32(x) bswap_32(x)
 #define OSSwapHostToBigInt64(x) bswap_64(x)
+
+#else 
+
+#include <libkern/_OSByteOrder.h>
+#define OSSwapHostToBigInt32(x) __DARWIN_OSSwapInt32(x)
+#define OSSwapHostToBigInt64(x) __DARWIN_OSSwapInt64(x)
+
+#endif
+
 /* length of message digest output in bytes (160 bits) */
 #define MD_LENGTH               20
 /* length of cipher key in bytes (128 bits) */
